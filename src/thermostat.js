@@ -1,4 +1,4 @@
-  // 'use strict';
+// 'use strict'
 
 function Thermostat() {
   this.temperature = 20;
@@ -6,4 +6,8 @@ function Thermostat() {
 
 Thermostat.prototype.getCurrentTemperature = function() {
   return this.temperature;
+};
+
+Thermostat.prototype.up = function() {
+  this.temperature += 1;
 };
