@@ -21,14 +21,19 @@ describe('Thermostat', function() {
     expect(thermostat.getCurrentTemperature()).toEqual(19);
   });
 
-  it ('has a minimum temperature of 10 degrees', function() {
-    expect(thermostat.getMinTemp()).toEqual(10);
+  it ('has a minimum temperature at 10 degrees', function() {
+    for (var i = 0; i < 11; i++) {thermostat.down();}
+    expect(thermostat.getCurrentTemperature()).toEqual(10);
   });
 
+  it ('has power saving mode on as default', function () {
+    expect(thermostat.isPowerSaving()).toBe(true);
+  });
 
-  // it ('throws error when reaching minimum temperature', function() {
-  //   for (i = 0; i < 11; i++) {thermostat.down();}
-  //   expect(thermostat.getCurrentTemperature()).toThrow(new Error("Minimum temperature is 10"));
+  // it ('has a maximum temperatuer of 32 when power saving mode is off', function () {
+  //   spyOn(Thermostat, 'isPowerSaving()').andReturn(false);
+  //   expect(thermostat.isMaximumTemperature()).toEqual(32);
   // });
-
 });
+
+// spyOn(obj, 'method').andReturn('Pow!')
