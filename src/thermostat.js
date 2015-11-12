@@ -15,7 +15,7 @@ Thermostat.prototype.getCurrentTemperature = function() {
 
 Thermostat.prototype.up = function() {
   if (this.isMaximumTemperature()) {
-    throw "Can not increase temperature, maximum is reached";
+    return;
   }
   this.temperature += 1;
 };
