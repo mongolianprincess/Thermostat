@@ -6,6 +6,7 @@ function Thermostat() {
   this.MINIMUM_TEMPERATURE = 10;
   this.MAXIMUM_TEMPERATURE = 32;
   this.powerSavingModeMax = 25;
+  this.colour = "yellow";
 }
 
 Thermostat.prototype.getCurrentTemperature = function() {
@@ -14,7 +15,7 @@ Thermostat.prototype.getCurrentTemperature = function() {
 
 Thermostat.prototype.up = function() {
   if (this.isMaximumTemperature()) {
-    return;
+    throw "Can not increase temperature, maximum is reached";
   }
   this.temperature += 1;
 };
@@ -45,6 +46,16 @@ Thermostat.prototype.isMaximumTemperature = function() {
   return this.temperature === this.powerSavingModeMax;
 };
 
-Thermostat.prototype.reset = function (){
+Thermostat.prototype.reset = function () {
   this.temperature = 20;
+};
+
+Thermostat.prototype.tempColour = function () {
+  if (this.temperature < 18) {
+    this.colour = "green";
+  } else if (18 < this.temperature && this.temperature < 25) {
+    this.colour = "yellow";
+  } else {
+    this.colour = "red";
+  }
 };

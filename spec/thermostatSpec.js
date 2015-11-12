@@ -3,6 +3,7 @@ describe('Thermostat', function() {
   'use strict';
 
   var thermostat;
+
   beforeEach(function() {
     thermostat = new Thermostat();
   });
@@ -58,9 +59,29 @@ describe('Thermostat', function() {
     thermostat.temperature = 32;
     expect(function(){ thermostat.up(); }).toThrow("Can not increase temperature, maximum is reached");
   });
+
   it ('resets the temperature to 20',function(){
-    termostat.temperature = 25;
+    thermostat.temperature = 25;
     thermostat.reset();
     expect(thermostat.getCurrentTemperature).toEqual(20);
   });
+
+  it("should be green when temperature is less than 18", function() {
+    thermostat.temperature = 17;
+    thermostat.tempColour();
+    expect(thermostat.colour).toEqual("green");
+  });
+
+  it("should be yellow when temperature is between 18 and 25", function() {
+    thermostat.temperature = 20;
+    thermostat.tempColour();
+    expect(thermostat.colour).toEqual("yellow");
+  });
+
+  it("should be red when temperature is more than 25", function() {
+    thermostat.temperature = 30;
+    thermostat.tempColour();
+    expect(thermostat.colour).toEqual("red");
+  });
+
 });
