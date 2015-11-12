@@ -35,8 +35,13 @@ describe('Thermostat', function() {
     expect(thermostat.powerSavingMode).toBe(false);
   });
 
-  it("should have maximum tempererature of 25 when PSM is on", function() {
-    expect(thermostat.powerSavingModeMax).toEqual(25);
+  it("should have maximum tempererature of 25 when PSM is on",
+    function() {
+    thermostat.temperature = 20;
+    for (var i = 0; i < 6; i++) {
+      thermostat.up();
+    }
+    expect(thermostat.getCurrentTemperature()).toEqual(25);
   });
 
   it("should have maximum tempererature of 32 when PSM is off", function() {
@@ -45,7 +50,7 @@ describe('Thermostat', function() {
 
   it("shouldn't let you increase the temperature past the PSM max when PSM is on", function() {
     thermostat.temperature = 25;
-    expect(function(){ thermostat.up(); }).toThrow("Can not increase temperature, Power Saving Mode is On");
+    expect(function(){ thermostat.up(); }).toThrow("Can not increase temperature, maximum is reached");
   });
 
   it("shouldn't let you increase the temperature past the max when PSM is off", function() {
@@ -56,6 +61,6 @@ describe('Thermostat', function() {
   it ('resets the temperature to 20',function(){
     termostat.temperature = 25;
     thermostat.reset();
-    expect(thermostat.temperature).toEqual(20);
+    expect(thermostat.getCurrentTemperature).toEqual(20);
   });
 });
