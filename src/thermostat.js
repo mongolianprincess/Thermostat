@@ -2,7 +2,7 @@
 
 function Thermostat() {
   this.temperature = 20;
-  this.powerSaving = true;
+  this.powerSavingModeOn = true;
   this.MINIMUM_TEMPERATURE = 10;
   this.maximumTemperature = 25;
 }
@@ -26,8 +26,12 @@ Thermostat.prototype.isMinimumTemperature = function() {
   return this.temperature === this.MINIMUM_TEMPERATURE;
 };
 
-Thermostat.prototype.isPowerSaving = function () {
-  return this.powerSaving === true;
+Thermostat.prototype.isPowerSavingModeOn = function () {
+  return this.powerSavingModeOn === true;
+};
+
+Thermostat.prototype.isPowerSavingModeOff = function() {
+  return this.powerSavingModeOn === false;
 };
 
 // Thermostat.prototype.getMinTemp = function() {

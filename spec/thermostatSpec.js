@@ -26,14 +26,12 @@ describe('Thermostat', function() {
     expect(thermostat.getCurrentTemperature()).toEqual(10);
   });
 
-  it ('has power saving mode on as default', function () {
-    expect(thermostat.isPowerSaving()).toBe(true);
+  it ('has power saving mode on by default', function () {
+    expect(thermostat.isPowerSavingModeOn()).toBe(true);
   });
 
-  // it ('has a maximum temperatuer of 32 when power saving mode is off', function () {
-  //   spyOn(Thermostat, 'isPowerSaving()').andReturn(false);
-  //   expect(thermostat.isMaximumTemperature()).toEqual(32);
-  // });
-});
+  it ('can switch power saving mode off',function(){
+    expect(thermostat.isPowerSavingModeOff()).toBe(false);
+  });
 
-// spyOn(obj, 'method').andReturn('Pow!')
+});
