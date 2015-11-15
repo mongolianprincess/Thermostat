@@ -33,7 +33,7 @@ describe('Thermostat', function() {
 
   it ('can switch power saving mode off',function(){
     thermostat.switchPowerSavingModeOff();
-    expect(thermostat.powerSavingMode).toBe(false);
+    expect(thermostat.isPowerSavingModeOn()).toBe(false);
   });
 
   it("should have maximum tempererature of 25 when PSM is on",
@@ -46,6 +46,7 @@ describe('Thermostat', function() {
   });
 
   it ('should have maximum temperature of 32 when PSM is off',function(){
+    thermostat.switchPowerSavingModeOff();
     for (var i = 0; i < 13; i++) {
       thermostat.up();
     }
@@ -53,10 +54,10 @@ describe('Thermostat', function() {
   });
 
   it ('can set PSM on and off',function (){
-    thermostat.switchPowerSavingModeoff();
-    expect(thermostat.powerSavingMode).toEqual(false);
-    thermostat.isPowerSavingModeOn();
-    expect(thermostat.powerSavingMode).toEqual(true);
+    thermostat.switchPowerSavingModeOff();
+    expect(thermostat.isPowerSavingModeOn()).toEqual(false);
+    thermostat.switchPowerSavingModeOn();
+    expect(thermostat.isPowerSavingModeOn()).toEqual(true);
   });
 
   it ('resets the temperature to 20',function(){
@@ -67,20 +68,17 @@ describe('Thermostat', function() {
 
   it("should be green when temperature is less than 18", function() {
     thermostat.temperature = 17;
-    thermostat.tempColour();
-    expect(thermostat.colour).toEqual("green");
+    expect(thermostat.energyUsage()).toEqual("low-usage");
   });
 
   it("should be yellow when temperature is between 18 and 25", function() {
     thermostat.temperature = 20;
-    thermostat.tempColour();
-    expect(thermostat.colour).toEqual("yellow");
+    expect(thermostat.energyUsage()).toEqual("medium-usage");
   });
 
   it("should be red when temperature is more than 25", function() {
     thermostat.temperature = 30;
-    thermostat.tempColour();
-    expect(thermostat.colour).toEqual("red");
+    expect(thermostat.energyUsage()).toEqual("high-usage");
   });
 
 });
